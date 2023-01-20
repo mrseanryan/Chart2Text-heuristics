@@ -43,7 +43,19 @@ Example data is provided in `./dataset`.
 
 The images for the examples are at https://github.com/JasonObeid/Chart2TextImages
 
-These can be downloaded with the script:
+#### Example captions generated, with matching chart images
+
+| Chart | Caption (auto-generated) |
+|---|---|
+| ![0.png](./examples/images/0.png) | Q4 '19 had highest number of users in millions 2498. |
+| ![1.png](./examples/images/1.png) | LeBron James has 33655 number of points scored. Carmelo Anthony has 26067 number of points scored. Vince Carter has 25623 number of points scored. Kevin Durant has 22940 number of points scored. Wilt Chamberlain had highest number of points scored 38387. |
+| ![2.png](./examples/images/2.png) | Selena Gomez had highest number of followers in millions 334.72. |
+| ![3.png](./examples/images/3.png) | Washington Redskins had highest super bowl wins 6. |
+| ![4.png](./examples/images/4.png) | Wells Fargo had highest market value in billion u.s. dollars 961.3. |
+| ![5.png](./examples/images/5.png) | World of Warcraft had highest share of playing time 6.88%. |
+
+#### More images
+The full set of images can be downloaded with the script:
 
 ```
 ./download_images.sh
@@ -52,6 +64,5 @@ These can be downloaded with the script:
 Generate captions for the examples:
 
 ```
-./generate_for_examples.sh
+./test.sh
 ```
-

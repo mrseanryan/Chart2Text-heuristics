@@ -43,6 +43,11 @@ def summarize(df):
     df_interesting = df.apply(lambda row: filter_to_asterisk(row, name_column), axis=1).dropna()
     df_interesting = df[df_interesting]
     df_interesting_sorted = df_interesting.sort_values(by=value_column, ascending=False)
+    # xxx use one or two randomly:
+    # done - value
+    # xxx at xth place
+    # xxx above/below average
+    # xxx More than X less than Y
 
     interesting_names = []
     for _index, row in df_interesting_sorted.iterrows():
@@ -59,8 +64,20 @@ def summarize(df):
         summary.append(f"{clean_name(max_row_name)} had highest {value_column.lower()} {max_row_value}")
 
     # top 3
-    # df['percent'] = (df[column_int] / df2[column_int].sum()) * 100
-	# df_sorted = df.sort_values(by=column_int, ascending=False)
+    # xxx
+
+    # bottom 3
+    # xxx
+
+    # average
+    # xxx
+
+    # Time-based charts
+    # Trend for last 3 items ("Trend since 'Q3'")
+    # "Large increase/decrease in '<last period>'"
+    # "Large increase/decrease in '<last period>'"
+    # "No significant change in '<last period>'"
+    # xxx
 
     summary.append("")
 
