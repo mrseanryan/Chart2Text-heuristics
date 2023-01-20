@@ -39,6 +39,12 @@ def clean_name(name):
         return name.replace('*', '')
     return name
 
+def make_lower(name):
+    # xxx exclude abbreviations like US, U.S.
+    if is_string(name):
+        return name.lower()
+    return name
+
 def summarize(df):
     summary = []
 
@@ -57,7 +63,7 @@ def summarize(df):
 
     interesting_names = []
     for _index, row in df_interesting_sorted.iterrows():
-        summary.append(f"{clean_name(row[name_column])} has {row[value_column]} {value_column.lower()}")
+        summary.append(f"{clean_name(row[name_column])} has {row[value_column]} {make_lower(value_column)}")
         interesting_names.append(row[name_column])
 
     # max
@@ -67,7 +73,7 @@ def summarize(df):
     max_row_value = max_row[value_column]
 
     if (max_row_name not in interesting_names):
-        summary.append(f"{clean_name(max_row_name)} had highest {value_column.lower()} {max_row_value}")
+        summary.append(f"{clean_name(max_row_name)} had highest {make_lower(value_column)} {max_row_value}")
 
     # top 3
     # xxx
