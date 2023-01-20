@@ -2,7 +2,10 @@
 Generate a summary of a data table, suitable for use with a matching chart.
 generate_summary.py <path to CSV file> [--help]
 """
+import numbers
 from optparse import OptionParser
+import pandas
+import pymannkendall as mk
 
 import util_file
 
@@ -44,6 +47,33 @@ def make_lower(name):
     if is_string(name):
         return name.lower()
     return name
+
+def filter_to_time(row, name_column):
+    # keys like: Q4 2024 2019.0
+    # TODO xxx add more - 2018/19 '99
+    name = row[name_column]
+    quarters = ["Q1", "Q2", "Q3", "Q4"]
+    if (name in quarters):
+        return True
+    if isinstance(name, numbers.Number):
+        year = int(name)
+        return year > 1000 and year < 3000 # year 3000 problem
+    return False
+
+def is_timeseries(df, name_column):
+    # Could ask pandas.to_datetime, but it is bit too strict
+    time_rows = df.apply(lambda row: filter_to_time(row, name_column), axis=1).dropna()
+    time_rows = df[time_rows]
+    return len(time_rows) > 0
+
+def filter_to_numeric(row, value_column):
+    value = row[value_column]
+    return isinstance(value, numbers.Number)
+
+def are_values_all_numeric(df, value_column):
+    numeric_rows = df.apply(lambda row: filter_to_numeric(row, value_column), axis=1).dropna()
+    numeric_rows = df[numeric_rows]
+    return len(numeric_rows) > 0
 
 def summarize(df):
     summary = []
@@ -109,11 +139,15 @@ def summarize(df):
     # xxx
 
     # Time-based charts
-    # Trend for last 3 items ("Trend since 'Q3'")
-    # "Large increase/decrease in '<last period>'"
-    # "Large increase/decrease in '<last period>'"
-    # "No significant change in '<last period>'"
-    # xxx
+    if is_timeseries(df, name_column) and are_values_all_numeric(df, value_column):
+        df_values = df[value_column]
+        trend_test = mk.original_test(df_values, alpha=0.05)
+        summary.append(f"Overall trend is {trend_test.trend}")
+        # Trend for last 3 items ("Trend since 'Q3'")
+        # "Large increase/decrease in '<last period>'"
+        # "Large increase/decrease in '<last period>'"
+        # "No significant change in '<last period>'"
+        # xxx
 
     summary.append("")
 
