@@ -24,14 +24,20 @@ INPUT_FILEPATH = args[0]
 
 data = util_file.read_csv_file(INPUT_FILEPATH)
 
+def is_string(item):
+    return isinstance(item, str)
+
 def filter_to_asterisk(row, name_column):
-    if '*' in row[name_column]:
-        return True
+    if is_string(row[name_column]):
+        if '*' in row[name_column]:
+            return True
 
     return False
 
 def clean_name(name):
-    return name.replace('*', '')
+    if is_string(name):
+        return name.replace('*', '')
+    return name
 
 def summarize(df):
     summary = []
