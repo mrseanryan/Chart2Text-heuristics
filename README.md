@@ -1,5 +1,5 @@
 # Chart2Text-heuristics
-Chart-to-Text: Generating Natural Language Explanations for Charts via heuristics
+Chart-to-Text: Generating Natural Language Explanations for Charts via heuristics.
 
 Given chart data in CSV format, generate natural language to describe the data.
 
