@@ -59,7 +59,7 @@ Time-based charts:
 
 | Chart | Caption (auto-generated) |
 |---|---|
-| ![0.time.png](./examples/images/0.time.png) | Q4 '19 had highest number of users in millions 2498. |
+| ![0.time.png](./examples/images/0.time.png) | Q4 '19 had highest number of users in millions 2498. Overall trend is decreasing. |
 | ![101.time.png](./examples/images/101.time.png) | 2024 has 2.54% inflation rate compared to previous year. 2023 has 2.47% inflation rate compared to previous year. 2022 has 2.33% inflation rate compared to previous year. 2021 has 1.97% inflation rate compared to previous year. 2020 has 1.82% inflation rate compared to previous year. 2019 has 1.6% inflation rate compared to previous year. |
 | ![104.time.png](./examples/images/104.time.png) | 2019.0 had highest billion u.s. dollars 514.41. Overall trend is decreasing. |
 | ![105.time.png](./examples/images/105.time.png) | 2018/19 had highest vehicle sales in million units 21.18. |

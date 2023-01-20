@@ -52,9 +52,11 @@ def filter_to_time(row, name_column):
     # keys like: Q4 2024 2019.0
     # TODO xxx add more - 2018/19 '99
     name = row[name_column]
-    quarters = ["Q1", "Q2", "Q3", "Q4"]
-    if (name in quarters):
-        return True
+    if is_string(name):
+        quarters = ["Q1", "Q2", "Q3", "Q4"]
+        for quarter in quarters:
+            if name.startswith(quarter):
+                return True
     if isinstance(name, numbers.Number):
         year = int(name)
         return year > 1000 and year < 3000 # year 3000 problem
