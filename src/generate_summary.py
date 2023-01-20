@@ -60,11 +60,35 @@ def summarize(df):
     # xxx at xth place
     # xxx above/below average
     # xxx More than X less than Y
-
+    
     interesting_names = []
-    for _index, row in df_interesting_sorted.iterrows():
-        summary.append(f"{clean_name(row[name_column])} has {row[value_column]} {make_lower(value_column)}")
-        interesting_names.append(row[name_column])
+    if (len(df_interesting_sorted) <= 2):
+        for _index, row in df_interesting_sorted.iterrows():
+            place = df.index[df[name_column] == row[name_column]].tolist()
+            summary.append(f"{clean_name(row[name_column])} is in {place} place with {row[value_column]} {make_lower(value_column)}")
+
+            # bottom or top percentile
+            # xxx
+            # df.describe()["25%"]
+            # df.describe()["75%"]
+
+            interesting_names.append(row[name_column])
+    else:
+        # Many interesting items - so summarize them
+        #
+        # TODO xxx handle % values - need convert, create new column...
+        interesting_average = df_interesting.mean(numeric_only=True)
+        if (len(interesting_average) > 0):
+            interesting_average = interesting_average[0]
+            interesting_names_clean = []
+            for _index, row in df_interesting_sorted.iterrows():
+                interesting_names_clean.append(clean_name(row[name_column]))
+                interesting_names.append(row[name_column])
+            summary.append(f"{', '.join(interesting_names_clean)} had an average {interesting_average} {make_lower(value_column)}")
+        else:
+            for _index, row in df_interesting_sorted.iterrows():
+                summary.append(f"{clean_name(row[name_column])} has {row[value_column]} {make_lower(value_column)}")
+                interesting_names.append(row[name_column])
 
     # max
     max_row = df.max()

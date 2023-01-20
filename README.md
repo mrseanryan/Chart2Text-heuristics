@@ -47,7 +47,7 @@ The images for the examples are at https://github.com/JasonObeid/Chart2TextImage
 
 | Chart | Caption (auto-generated) |
 |---|---|
-| ![1.png](./examples/images/1.png) | LeBron James has 33655 number of points scored. Carmelo Anthony has 26067 number of points scored. Vince Carter has 25623 number of points scored. Kevin Durant has 22940 number of points scored. Wilt Chamberlain had highest number of points scored 38387. |
+| ![1.png](./examples/images/1.png) | LeBron James, Carmelo Anthony, Vince Carter, Kevin Durant had an average 27071.25 number of points scored. Wilt Chamberlain had highest number of points scored 38387. |
 | ![2.png](./examples/images/2.png) | Selena Gomez had highest number of followers in millions 334.72. |
 | ![3.png](./examples/images/3.png) | Washington Redskins had highest super bowl wins 6. |
 | ![4.png](./examples/images/4.png) | Wells Fargo had highest market value in billion u.s. dollars 961.3. |
@@ -59,6 +59,7 @@ Time-based charts:
 | Chart | Caption (auto-generated) |
 |---|---|
 | ![0.time.png](./examples/images/0.time.png) | Q4 '19 had highest number of users in millions 2498. |
+| ![101.time.png](./examples/images/101.time.png) | 2024 has 2.54% inflation rate compared to previous year. 2023 has 2.47% inflation rate compared to previous year. 2022 has 2.33% inflation rate compared to previous year. 2021 has 1.97% inflation rate compared to previous year. 2020 has 1.82% inflation rate compared to previous year. 2019 has 1.6% inflation rate compared to previous year. |
 | ![104.time.png](./examples/images/104.time.png) | 2019.0 had highest billion u.s. dollars 514.41. |
 | ![105.time.png](./examples/images/105.time.png) | 2018/19 had highest vehicle sales in million units 21.18. |
 | ![115.time.multiple-peaks.png](./examples/images/115.time.multiple-peaks.png) | '99 had highest unemployment rate 9.6%. |

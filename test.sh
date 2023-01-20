@@ -7,6 +7,7 @@ python3 src/generate_summary.py examples/dataset/data/5.csv
 
 echo == Time-based charts ==
 python3 src/generate_summary.py examples/dataset/data/0.csv
+python3 src/generate_summary.py examples/dataset/data/101.csv
 python3 src/generate_summary.py examples/dataset/data/104.csv
 python3 src/generate_summary.py examples/dataset/data/105.csv
 python3 src/generate_summary.py examples/dataset/data/115.csv
