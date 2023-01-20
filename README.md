@@ -48,11 +48,11 @@ The images for the examples are at https://github.com/JasonObeid/Chart2TextImage
 
 | Chart | Caption (auto-generated) |
 |---|---|
-| ![1.png](./examples/images/1.png) | LeBron James, Carmelo Anthony, Vince Carter, Kevin Durant had an average 27071.25 number of points scored. Wilt Chamberlain had highest number of points scored 38387. |
-| ![2.png](./examples/images/2.png) | Selena Gomez had highest number of followers in millions 334.72. |
-| ![3.png](./examples/images/3.png) | Washington Redskins had highest super bowl wins 6. |
-| ![4.png](./examples/images/4.png) | Wells Fargo had highest market value in billion u.s. dollars 961.3. |
-| ![5.png](./examples/images/5.png) | World of Warcraft had highest share of playing time 6.88%. |
+| ![1.png](./examples/images/1.png) | LeBron James, Carmelo Anthony, Vince Carter, Kevin Durant had an average 27071.25 number of points scored. Kareem Abdul-Jabbar had highest number of points scored 38387. |
+| ![2.png](./examples/images/2.png) | Instagram had highest number of followers in millions 334.72. |
+| ![3.png](./examples/images/3.png) | Pittsburgh Steelers had highest super bowl wins 6. |
+| ![4.png](./examples/images/4.png) | Apple had highest market value in billion u.s. dollars 961.3. |
+| ![5.png](./examples/images/5.png) | - |
 
 Time-based charts:
 
@@ -63,7 +63,7 @@ Time-based charts:
 | ![101.time.png](./examples/images/101.time.png) | 2024 has 2.54% inflation rate compared to previous year. 2023 has 2.47% inflation rate compared to previous year. 2022 has 2.33% inflation rate compared to previous year. 2021 has 1.97% inflation rate compared to previous year. 2020 has 1.82% inflation rate compared to previous year. 2019 has 1.6% inflation rate compared to previous year. |
 | ![104.time.png](./examples/images/104.time.png) | 2019.0 had highest billion u.s. dollars 514.41. Overall trend is decreasing. |
 | ![105.time.png](./examples/images/105.time.png) | 2018/19 had highest vehicle sales in million units 21.18. |
-| ![115.time.multiple-peaks.png](./examples/images/115.time.multiple-peaks.png) | '99 had highest unemployment rate 9.6%. |
+| ![115.time.multiple-peaks.png](./examples/images/115.time.multiple-peaks.png) | - |
 
 #### More images
 The full set of images can be downloaded with the script:

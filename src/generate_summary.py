@@ -121,13 +121,17 @@ def summarize(df):
                 interesting_names.append(row[name_column])
 
     # max
-    max_row = df.max()
+    # TODO xxx support % values
+    # TODO xxx support joint-max rows
+    if are_values_all_numeric(df, value_column):
+        max_row_value = df[value_column].max()
+        max_row_name = df[name_column][df[value_column].idxmax()]
 
-    max_row_name = max_row[name_column]
-    max_row_value = max_row[value_column]
-
-    if (max_row_name not in interesting_names):
-        summary.append(f"{clean_name(max_row_name)} had highest {make_lower(value_column)} {max_row_value}")
+        if (max_row_name not in interesting_names):
+            summary.append(f"{clean_name(max_row_name)} had highest {make_lower(value_column)} {max_row_value}")
+    else:
+        # TODO xxx - fallback
+        summary.append("-")
 
     # top 3
     # xxx
