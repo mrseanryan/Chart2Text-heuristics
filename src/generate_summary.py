@@ -149,6 +149,8 @@ def convert_to_sortable_time(time_value):
                 remaining_parts_as_time = []
                 for part in remaining_parts:
                     remaining_parts_as_time.append(convert_to_sortable_time(part))
+                # have quarters last. assumption: remainder is some kind of year.
+                remaining_parts_as_time.append(quarter)
                 return ' '.join(remaining_parts_as_time)
         # like "2018/19"
         if re.search("^\d{4}/\d+$", time_value):
@@ -158,6 +160,8 @@ def convert_to_sortable_time(time_value):
             year_2_digit = int(time_value[1:])
             if year_2_digit >= 70:
                 return f"19{year_2_digit}"
+            if year_2_digit >= 0 and year_2_digit <= 9:
+                return f"200{year_2_digit}"
             return f"20{year_2_digit}"
         # like "2024*" or "2024"
         if re.search("^\d{4}(\*)?$", time_value):

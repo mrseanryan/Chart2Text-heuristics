@@ -59,7 +59,7 @@ Time-based charts:
 
 | Chart | Caption (auto-generated) |
 |---|---|
-| ![0.time.png](./examples/images/0.time.png) | Q1 '10 to Q1 '09 has an overall increasing trend. Q4 '19 had highest number of users in millions 2498. |
+| ![0.time.png](./examples/images/0.time.png) | Q3 '08 to Q4 '19 has an overall increasing trend. Q4 '19 had highest number of users in millions 2498. |
 | ![101.time.png](./examples/images/101.time.png) | 2024, 2023, 2022, 2021, 2020, 2019 had an average 2.12% inflation rate compared to previous year. 1984 to 2024* has an overall decreasing trend. 1997 had lowest inflation rate compared to previous year 0.23%. |
 | ![104.time.png](./examples/images/104.time.png) | 2006 to 2019 has an overall increasing trend. 2019 had highest billion u.s. dollars 514.41. |
 | ![105.time.png](./examples/images/105.time.png) | 2010/11 to 2018/19 has an overall increasing trend. 2018/19 had highest vehicle sales in million units 21.18. |
