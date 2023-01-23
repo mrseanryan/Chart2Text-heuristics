@@ -102,18 +102,27 @@ def remove_pc(value):
         return value[:-1]
     return float(value)
 
+def format_value(value, is_percent):
+    value = round(value, 2)
+    if (is_percent):
+        return f"{value}%"
+    return value
+
 def summarize(df):
     summary = []
 
     name_column = df.columns[0]
     value_column = df.columns[1]
 
+    is_percent = False
+
     if not pandas.api.types.is_numeric_dtype(df[value_column]):
         if is_percentages(df, value_column):
-            value_column_without_pc = value_column + " %"
+            value_column_without_pc = value_column + " "
             df[value_column_without_pc] = df.apply(lambda row: remove_pc(row[value_column]), axis=1)
             df[value_column_without_pc] = df[value_column_without_pc].astype(float)
-            value_column = value_column_without_pc
+            df[value_column] = df[value_column_without_pc] # replace the data, so we keep the nice column name
+            is_percent = True
 
     # rows of interest (*)
     df_interesting = df.apply(lambda row: filter_to_asterisk(row, name_column), axis=1).dropna()
@@ -129,7 +138,7 @@ def summarize(df):
     if (len(df_interesting_sorted) <= 2):
         for _index, row in df_interesting_sorted.iterrows():
             place = df.index[df[name_column] == row[name_column]].tolist()
-            summary.append(f"{clean_name(row[name_column])} is in {place} place with {row[value_column]} {make_lower(value_column)}")
+            summary.append(f"{clean_name(row[name_column])} is in {place} place with {format_value(row[value_column], is_percent)} {make_lower(value_column)}")
 
             # bottom or top percentile
             # xxx
@@ -147,10 +156,10 @@ def summarize(df):
             for _index, row in df_interesting_sorted.iterrows():
                 interesting_names_clean.append(clean_name(row[name_column]))
                 interesting_names.append(row[name_column])
-            summary.append(f"{', '.join(interesting_names_clean)} had an average {interesting_average} {make_lower(value_column)}")
+            summary.append(f"{', '.join(interesting_names_clean)} had an average {format_value(interesting_average, is_percent)} {make_lower(value_column)}")
         else:
             for _index, row in df_interesting_sorted.iterrows():
-                summary.append(f"{clean_name(row[name_column])} has {row[value_column]} {make_lower(value_column)}")
+                summary.append(f"{clean_name(row[name_column])} has {format_value(row[value_column], is_percent)} {make_lower(value_column)}")
                 interesting_names.append(row[name_column])
 
     # max
@@ -160,7 +169,7 @@ def summarize(df):
         max_row_name = df[name_column][df[value_column].idxmax()]
 
         if (max_row_name not in interesting_names):
-            summary.append(f"{clean_name(max_row_name)} had highest {make_lower(value_column)} {max_row_value}")
+            summary.append(f"{clean_name(max_row_name)} had highest {make_lower(value_column)} {format_value(max_row_value, is_percent)}")
     else:
         # TODO xxx - fallback
         summary.append("-")
