@@ -171,6 +171,11 @@ def convert_to_sortable_time(time_value):
 def add_time_column(df, name_column, time_column):
     df[time_column] = df.apply(lambda row: convert_to_sortable_time(row[name_column]), axis=1)
 
+def list_with_and(names):
+    names_but_last = names[:-1]
+    text = ', '.join(names_but_last)
+    return f"{text} and {names[len(names)-1]}"
+
 def summarize(df):
     summary = []
 
@@ -190,7 +195,7 @@ def summarize(df):
     # rows of interest (*)
     df_interesting = df.apply(lambda row: filter_to_asterisk(row, name_column), axis=1).dropna()
     df_interesting = df[df_interesting]
-    df_interesting_sorted = df_interesting.sort_values(by=value_column, ascending=False)
+    df_interesting_sorted = df_interesting.sort_values(by=name_column, ascending=True)
     # xxx use one or two randomly:
     # done - value
     # xxx at xth place
@@ -219,7 +224,7 @@ def summarize(df):
             for _index, row in df_interesting_sorted.iterrows():
                 interesting_names_clean.append(clean_name(row[name_column]))
                 interesting_names.append(row[name_column])
-            summary.append(f"{', '.join(interesting_names_clean)} had an average {format_value(interesting_average, is_percent)} {make_lower(value_column)}")
+            summary.append(f"{list_with_and(interesting_names_clean)} had an average {format_value(interesting_average, is_percent)} {make_lower(value_column)}")
         else:
             for _index, row in df_interesting_sorted.iterrows():
                 summary.append(f"{clean_name(row[name_column])} has {format_value(row[value_column], is_percent)} {make_lower(value_column)}")
