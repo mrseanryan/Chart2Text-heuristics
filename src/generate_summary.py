@@ -227,7 +227,7 @@ def summarize(df):
             summary.append(f"{list_with_and(interesting_names_clean)} had an average {format_value(interesting_average, is_percent)} {make_lower(value_column)}")
         else:
             for _index, row in df_interesting_sorted.iterrows():
-                summary.append(f"{clean_name(row[name_column])} has {format_value(row[value_column], is_percent)} {make_lower(value_column)}")
+                summary.append(f"{clean_name(row[name_column])} had {format_value(row[value_column], is_percent)} {make_lower(value_column)}")
                 interesting_names.append(row[name_column])
 
     is_all_numeric = are_values_all_numeric(df, value_column)
@@ -251,7 +251,7 @@ def summarize(df):
             else:
                 first_period = df_tmp[name_column].values[0]
                 last_period = df_tmp[name_column].values[len(df)-1]
-                summary.append(f"{first_period} to {last_period} has an overall {trend_test.trend} trend")
+                summary.append(f"{first_period} to {last_period} had an overall {trend_test.trend} trend")
                 if trend_test.trend == 'increasing':
                     is_increasing = True
                 else:
