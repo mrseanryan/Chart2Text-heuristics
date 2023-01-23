@@ -4,6 +4,7 @@ generate_summary.py <path to CSV file> [--help]
 """
 import numbers
 from optparse import OptionParser
+import re
 import pandas
 
 import pymannkendall as mk
@@ -50,14 +51,22 @@ def make_lower(name):
     return name
 
 def filter_to_time(row, name_column):
-    # keys like: Q4 2024 2019.0
-    # TODO xxx add more - 2018/19 '99
+    # If all keys look like a time period, then can assume the values are a sorted time series.
     name = row[name_column]
     if is_string(name):
         quarters = ["Q1", "Q2", "Q3", "Q4"]
         for quarter in quarters:
             if name.startswith(quarter):
                 return True
+        # like "2018/19"
+        if re.search("^\d{4}/\d+$", name):
+            return True
+        # like "'10"
+        if re.search("^'\d{2}$", name):
+            return True
+        # like "2024*" or "2024"
+        if re.search("^\d{4}(\*)?$", name):
+            return True
     if isinstance(name, numbers.Number):
         year = int(name)
         return year > 1000 and year < 3000 # year 3000 problem
@@ -169,12 +178,11 @@ def summarize(df):
     if is_timeseries(df, name_column) and are_values_all_numeric(df, value_column):
         df_values = df[value_column]
         trend_test = mk.original_test(df_values, alpha=0.05)
-        summary.append(f"Overall trend is {trend_test.trend}")
-        # Trend for last 3 items ("Trend since 'Q3'")
-        # "Large increase/decrease in '<last period>'"
-        # "Large increase/decrease in '<last period>'"
-        # "No significant change in '<last period>'"
-        # xxx
+        trend_desc = trend_test.trend
+        if trend_desc == 'no trend':
+            summary.append(f"No overall trend")
+        else:
+            summary.append(f"Overall trend is {trend_test.trend}")
 
     summary.append("")
 
