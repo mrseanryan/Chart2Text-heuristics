@@ -5,6 +5,7 @@ generate_summary.py <path to CSV file> [--help]
 import numbers
 from optparse import OptionParser
 import pandas
+
 import pymannkendall as mk
 
 import util_file
@@ -66,7 +67,17 @@ def is_timeseries(df, name_column):
     # Could ask pandas.to_datetime, but it is bit too strict
     time_rows = df.apply(lambda row: filter_to_time(row, name_column), axis=1).dropna()
     time_rows = df[time_rows]
-    return len(time_rows) > 0
+    return len(time_rows) == len(df)
+
+def filter_to_percentages(row, value_column):
+    value = row[value_column]
+    return value.endswith('%')
+
+def is_percentages(df, value_column):
+    # Could ask pandas.to_datetime, but it is bit too strict
+    rows = df.apply(lambda row: filter_to_percentages(row, value_column), axis=1).dropna()
+    rows = df[rows]
+    return len(rows) == len(df)
 
 def filter_to_numeric(row, value_column):
     value = row[value_column]
@@ -77,11 +88,23 @@ def are_values_all_numeric(df, value_column):
     numeric_rows = df[numeric_rows]
     return len(numeric_rows) > 0
 
+def remove_pc(value):
+    if value.endswith('%'):
+        return value[:-1]
+    return float(value)
+
 def summarize(df):
     summary = []
 
     name_column = df.columns[0]
     value_column = df.columns[1]
+
+    if not pandas.api.types.is_numeric_dtype(df[value_column]):
+        if is_percentages(df, value_column):
+            value_column_without_pc = value_column + " %"
+            df[value_column_without_pc] = df.apply(lambda row: remove_pc(row[value_column]), axis=1)
+            df[value_column_without_pc] = df[value_column_without_pc].astype(float)
+            value_column = value_column_without_pc
 
     # rows of interest (*)
     df_interesting = df.apply(lambda row: filter_to_asterisk(row, name_column), axis=1).dropna()
@@ -108,7 +131,6 @@ def summarize(df):
     else:
         # Many interesting items - so summarize them
         #
-        # TODO xxx handle % values - need convert, create new column...
         interesting_average = df_interesting.mean(numeric_only=True)
         if (len(interesting_average) > 0):
             interesting_average = interesting_average[0]
@@ -123,7 +145,6 @@ def summarize(df):
                 interesting_names.append(row[name_column])
 
     # max
-    # TODO xxx support % values
     # TODO xxx support joint-max rows
     if are_values_all_numeric(df, value_column):
         max_row_value = df[value_column].max()
